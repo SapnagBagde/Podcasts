@@ -7,9 +7,10 @@ import {
   CloseRounded,
   SearchRounded,
   FavoriteRounded,
-  UploadRounded,
+  CloudUploadRounded,
   LightModeRounded,
-  LogoutRounded
+  LogoutRounded,
+  DarkModeRounded
 }  from "@mui/icons-material"
 
 const MenuContainer = styled.div `
@@ -19,6 +20,14 @@ const MenuContainer = styled.div `
   display:flex;
   background-color: ${({ theme }) => theme.bg};
   color: ${({ theme }) => theme.text_primary};
+  @media (max-width : 1100px){
+    position :fixed;
+    z-index:1000;
+    width:100%;
+    max-width:250px;
+    left:${({ menuOpen }) => (menuOpen ? "0" : "-100%")};
+    transition: 0.3s ease-in-out;
+  }
 `;
 
 const Logo = styled.div `
@@ -30,14 +39,14 @@ const Logo = styled.div `
   font-weight:bold;
   font-size:20px;
   margin:16px 0px;
-  width:100%;
 `;
 
 const Flex = styled.div `
   display:flex;
   flex-direction:row;
   align-items:center;
-  justify-content : center;
+  justify-content : space-between;
+  padding : 0px 12px;
 `;
 
 const Close = styled.div `
@@ -70,7 +79,7 @@ const NavText = styled.div `
 const HR = styled.div `
   width:100%;
   height:1px;
-  background-color : ${({ theme }) => theme.text_secondary };
+  background-color : ${({ theme }) => theme.text_secondary  + 50};
   margin :10px 0px;
 `;
 
@@ -78,59 +87,65 @@ const Image = styled.img `
   height:40px;
 `;
 
-const menuItems =[
-  {
-    link :"/",
-    name:"Dashboard",
-    icon :<HomeRounded />
-
-  },
-  {
-    link :"/search",
-    name:"Search",
-    icon :<SearchRounded />
-
-  },
-  {
-    link :"/favourite",
-    name:"Favourite",
-    icon :<FavoriteRounded />
-
-  },
-]
 
 
-const button =[
-  {
-    fun : () => console.log("Upload"),
-    name:"Upload",
-    icon :<UploadRounded />
 
-  },
-  {
-    fun : () => console.log("Upload"),
-    name:"Light Mode",
-    icon :<LightModeRounded />
-
-  },
-  {
-    fun : () => console.log("Upload"),
-    name:"LogOut",
-    icon :<LogoutRounded />
-
-  },
-]
-
-
-const Sidebar = () => {
+const Sidebar = ({
+  setMenuOpen,
+  setDarkMode,
+  darkMode ,
+  menuOpen
+}) => {
+  const menuItems =[
+    {
+      link :"/",
+      name:"Dashboard",
+      icon :<HomeRounded />
+  
+    },
+    {
+      link :"/search",
+      name:"Search",
+      icon :<SearchRounded />
+  
+    },
+    {
+      link :"/favourite",
+      name:"Favourite",
+      icon :<FavoriteRounded />
+  
+    },
+  ]
+  
+  
+  const button =[
+    {
+      fun : () => console.log("Upload"),
+      name:"Upload",
+      icon :<CloudUploadRounded />
+  
+    },
+    {
+      fun : () => setDarkMode(!darkMode),
+      name:  darkMode ? "Light Mode" : "Dark Mode",
+      icon :   darkMode ? <LightModeRounded /> : <DarkModeRounded/>
+  
+    },
+    {
+      fun : () => console.log("Upload"),
+      name:"LogOut",
+      icon :<LogoutRounded />
+  
+    },
+  ]
   return (
-    <MenuContainer>
+    <MenuContainer menuOpen ={menuOpen}>
       <Flex>
         <Logo>
           <Image  src ={LogoImage}/>
-          Podstream
+          PODSTREAM
         </Logo>
-        <Close>
+        <Close onClick={() => setMenuOpen(false)}>
           <CloseRounded />
         </Close>
       </Flex>
