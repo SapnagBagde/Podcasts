@@ -2,10 +2,11 @@ import React from 'react';
 import styled from 'styled-components'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import DefaultCard from '../components/DefaultCard.jsx';
-import  Category from "../utils/Data.js";
+import  {Category} from "../utils/Data.js";
 
 import { Link } from 'react-router-dom';
-
+import TopResult from '../components/TopResult.jsx';
+import MoreResult from "../components/MoreResult.jsx"
 
 const SearchMain = styled.div`
 padding: 20px 30px;
@@ -52,39 +53,74 @@ const Search_whole = styled.div`
     color: ${({ theme }) => theme.text_secondary};
 `;
 
+const OtherResults = styled.div`
+    display: flex;
+    flex-direction: column;
+    height: 700px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    gap: 6px;
+    padding: 4px 4px;
+    @media (max-width: 768px) {
+        height: 100%;
+        padding: 4px 0px;
+    }
+`;
+const DisplayNo = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+width: 100%;
+color: ${({ theme }) => theme.text_primary};
+`
+
 
 const Search = () => {
-    return (
+   
 
+    return (
         <SearchMain>
             <div style={{display: 'flex', justifyContent: 'center', width: '100%'}}>
             <Search_whole>
                 <SearchOutlinedIcon sx={{ "color": "inherit" }} />
                 <input type='text' placeholder='Search Artist/Podcast'
                     style={{ "border": "none", "outline": "none", "width": "100%", "background": "inherit", "color": "inherit" }}
-                />
+                    />
+                     
             </Search_whole>
 
             </div>
-
-            <Categories>
+           
+                <Categories>
                     <Heading>Browse All</Heading>
                     <BrowseAll>
-                    {Category.map((category) => (
+                        {Category.map((category) => (
                             <Link to={`/showpodcasts/${category.name.toLowerCase()}`} style={{ textDecoration: "none" }}>
                                 <DefaultCard category={category} />
                             </Link>
                         ))}
-                        
                     </BrowseAll>
                 </Categories>
+                <DisplayNo>No Podcasts Found</DisplayNo>
 
+                <>
+                    <TopResult  />
+                    <OtherResults>
+                        
+                        <MoreResult  />
+                        
+                    </OtherResults>
+                </>
 
+            
         </SearchMain>
+
     )
+
 }
 
+  
+
 export default Search
-
-
 
