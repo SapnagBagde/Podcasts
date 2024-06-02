@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import {Link} from  "react-router-dom"
 import LogoImage from "../images/Logo.png"
+import { DefaultCard } from '../components/DefaultCard'
 
 
 import {
