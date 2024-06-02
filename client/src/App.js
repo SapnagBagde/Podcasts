@@ -9,7 +9,10 @@ import DisplayPodcasts from "./pages/DisplayPodcasts.jsx";
 import Favourite from "./pages/Favourite.jsx";
 import PodcastDetails from "./pages/PodcastDetails.jsx";
 import Search from "./pages/Search.jsx";
-
+import Profile from "./pages/Profile.jsx";
+import Login from "./routes/Login.jsx"
+import SignUp from "./routes/Signup.jsx"
+import Home from "./routes/Home.jsx"
 
 
 const Container = styled.div`
@@ -58,6 +61,10 @@ function App() {
               <Route path="/"  exact element={<Dashboard/>} />
               <Route path="/search"  exact element={<Search/>} />
               <Route path="/favourite"  exact element={<Favourite/>} />
+              <Route path="/"  exact element={<Home/>} />
+              <Route path="/login"  exact element={<Login/>} />
+              <Route path="/signup"  exact element={<SignUp/>} />
+              <Route path="/profile"  exact element={<Profile/>} />
               <Route path="/podcast/:id"  exact element={<PodcastDetails/>} />
               <Route path="/showpodcasts/:type"  exact element={<DisplayPodcasts/>} />  
               
